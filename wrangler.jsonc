@@ -1,5 +1,5 @@
 {
-  "compatibility-date" : 2025-06-01
+  "compatibility-date" : "2025-06-01",
   "vars": {
     "UUID": "58c95ee1-1320-439f-b41b-083d4962fa59",
     "PROXYIP": "us.cfpyip.dpdns.org:443"
