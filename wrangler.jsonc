@@ -9,6 +9,7 @@
   ],
   "vars": {
     "UUID": "58c95ee1-1320-439f-b41b-083d4962fa59",
-    "PROXYIP": "us.cfpyip.dpdns.org:443"
+    "PROXYIP": "us.cfpyip.dpdns.org:443",
+    "NAT64": "2a01:4f9:c010:3f02:64::/96"
   }
 }
