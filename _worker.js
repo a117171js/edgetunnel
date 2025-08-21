@@ -34,7 +34,7 @@ let FileName = atob('ZWRnZXR1bm5lbA==');
 let BotToken;
 let ChatID;
 let proxyhosts = [];
-let proxyhostsURL = '';
+let proxyhostsURL = atob('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2NtbGl1L2NtbGl1L21haW4vUHJveHlIT1NU');
 let RproxyIP = 'false';
 const httpPorts = ["8080", "8880", "2052", "2082", "2086", "2095"];
 let httpsPorts = ["2053", "2083", "2087", "2096", "8443"];
@@ -411,7 +411,7 @@ async function handleTCPOutBound(remoteSocket, addressType, addressRemote, portR
         if (!useSocks) {
             const nat64Proxyip = `[${await resolveToIPv6(addressRemote)}]`;
             log(`NAT64 代理连接到 ${nat64Proxyip}:443`);
-            tcpSocket = await connectAndWrite(nat64Proxyip, '443');
+            tcpSocket = await connectAndWrite(nat64Proxyip, 443);
         }
         tcpSocket.closed.catch(error => {
             console.log('retry tcpSocket closed error', error);
@@ -1435,12 +1435,12 @@ function 配置信息(UUID, 域名地址) {
     const 指纹 = 'randomized';
 
     if (域名地址.includes('.workers.dev')) {
-        地址 = atob('dmlzYS5jbg==');
+        地址 = atob('dmlzYS5jb20uaGs=');
         端口 = 80;
         传输层安全 = ['', false];
     }
 
-    const 威图瑞 = `${协议类型}://${用户ID}@${地址}:${端口}\u003f\u0065\u006e\u0063\u0072\u0079` + 'p' + `${atob('dGlvbj0=') + 加密方式}\u0026\u0073\u0065\u0063\u0075\u0072\u0069\u0074\u0079\u003d${传输层安全[0]}&sni=${SNI}&fp=${指纹}&type=${传输层协议}&host=${伪装域名}&path=${encodeURIComponent(路径) + allowInsecure}&fragment=1,40-60,30-50,tlshello#${encodeURIComponent(别名)}`;
+    const 威图瑞 = `${协议类型}://${用户ID}@${地址}:${端口}\u003f\u0065\u006e\u0063\u0072\u0079` + 'p' + `${atob('dGlvbj0=') + 加密方式}\u0026\u0073\u0065\u0063\u0075\u0072\u0069\u0074\u0079\u003d${传输层安全[0]}&sni=${SNI}&fp=${指纹}&type=${传输层协议}&host=${伪装域名}&path=${encodeURIComponent(路径) + allowInsecure}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(别名)}`;
     const 猫猫猫 = `- {name: ${FileName}, server: ${地址}, port: ${端口}, type: ${协议类型}, uuid: ${用户ID}, tls: ${传输层安全[1]}, alpn: [h3], udp: false, sni: ${SNI}, tfo: false, skip-cert-verify: ${SCV}, servername: ${伪装域名}, client-fingerprint: ${指纹}, network: ${传输层协议}, ws-opts: {path: "${路径}", headers: {${伪装域名}}}}`;
     return [威图瑞, 猫猫猫];
 }
@@ -1492,28 +1492,17 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 
         if ((addresses.length + addressesapi.length + addressesnotls.length + addressesnotlsapi.length + addressescsv.length) == 0) {
             // 定义 Cloudflare IP 范围的 CIDR 列表
-            let cfips = [
-                '103.21.244.0/24',
-                '104.16.0.0/13',
-                '104.24.0.0/14',
-                '172.64.0.0/14',
-                '104.16.0.0/14',
-                '104.24.0.0/15',
-                '141.101.64.0/19',
-                '172.64.0.0/14',
-                '188.114.96.0/21',
-                '190.93.240.0/21',
-                '162.159.152.0/23',
-                '104.16.0.0/13',
-                '104.24.0.0/14',
-                '172.64.0.0/14',
-                '104.16.0.0/14',
-                '104.24.0.0/15',
-                '141.101.64.0/19',
-                '172.64.0.0/14',
-                '188.114.96.0/21',
-                '190.93.240.0/21',
-            ];
+            let cfips = ['104.16.0.0/13'];
+            // 请求 Cloudflare CIDR 列表
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/cmliu/cmliu/main/CF-CIDR.txt');
+                if (response.ok) {
+                    const data = await response.text();
+                    cfips = await 整理(data);
+                }
+            } catch (error) {
+                console.log('获取 CF-CIDR 失败，使用默认值:', error);
+            }
 
             // 生成符合给定 CIDR 范围的随机 IP 地址
             function generateRandomIPFromCIDR(cidr) {
@@ -2073,15 +2062,15 @@ function 生成本地订阅(host, UUID, noTLS, newAddressesapi, newAddressescsv,
         let 节点备注 = '';
         const matchingProxyIP = proxyIPPool.find(proxyIP => proxyIP.includes(address));
         if (matchingProxyIP) 最终路径 = `/proxyip=${matchingProxyIP}`;
-
+        /*
         if (proxyhosts.length > 0 && (伪装域名.includes('.workers.dev'))) {
             最终路径 = `/${伪装域名}${最终路径}`;
             伪装域名 = proxyhosts[Math.floor(Math.random() * proxyhosts.length)];
             节点备注 = ` 已启用临时域名中转服务，请尽快绑定自定义域！`;
         }
-
+        */
         const 协议类型 = atob(啥啥啥_写的这是啥啊);
-        const 维列斯Link = `${协议类型}://${UUID}@${address}:${port + atob('P2VuY3J5cHRpb249bm9uZSZzZWN1cml0eT10bHMmc25pPQ==') + 伪装域名}&fp=random&type=ws&host=${伪装域名}&path=${encodeURIComponent(最终路径) + allowInsecure}&fragment=1,40-60,30-50,tlshello#${encodeURIComponent(addressid + 节点备注)}`;
+        const 维列斯Link = `${协议类型}://${UUID}@${address}:${port + atob('P2VuY3J5cHRpb249bm9uZSZzZWN1cml0eT10bHMmc25pPQ==') + 伪装域名}&fp=random&type=ws&host=${伪装域名}&path=${encodeURIComponent(最终路径) + allowInsecure}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
 
         return 维列斯Link;
     }).join('\n');
@@ -2095,7 +2084,7 @@ function 生成本地订阅(host, UUID, noTLS, newAddressesapi, newAddressescsv,
 async function 整理(内容) {
     // 将制表符、双引号、单引号和换行符都替换为逗号
     // 然后将连续的多个逗号替换为单个逗号
-    var 替换后的内容 = 内容.replace(/[	|"'\r\n]+/g, ',').replace(/,+/g, ',');
+    var 替换后的内容 = 内容.replace(/[	"'\r\n]+/g, ',').replace(/,+/g, ',');
 
     // 删除开头和结尾的逗号（如果有的话）
     if (替换后的内容.charAt(0) == ',') 替换后的内容 = 替换后的内容.slice(1);
@@ -2471,8 +2460,8 @@ async function KV(request, env, txt = 'ADD.txt') {
 }
 
 async function resolveToIPv6(target) {
+    const defaultAddress = atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
     if (!DNS64Server) {
-        const defaultAddress = atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
         try {
             const response = await fetch(atob('aHR0cHM6Ly8xLjEuMS4xL2Rucy1xdWVyeT9uYW1lPW5hdDY0LmNtbGl1c3Nzcy5uZXQmdHlwZT1UWFQ='), {
                 headers: { 'Accept': 'application/dns-json' }
@@ -2683,10 +2672,10 @@ async function resolveToIPv6(target) {
         if (isIPv6(target)) return target; // IPv6直接返回
         const ipv4 = isIPv4(target) ? target : await fetchIPv4(target);
         const nat64 = DNS64Server.endsWith('/96') ? convertToNAT64IPv6(ipv4) : await queryNAT64(ipv4 + atob('LmlwLjA5MDIyNy54eXo='));
-        return isIPv6(nat64) ? nat64 : atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
+        return isIPv6(nat64) ? nat64 : defaultAddress;
     } catch (error) {
         console.error('解析错误:', error);
-        return atob('cHJveHlpcC5jbWxpdXNzc3MubmV0');
+        return defaultAddress;
     }
 }
 
